@@ -10,7 +10,7 @@
 	
 	<?php if(isset($error)): ?>
 	        <div class='error'>
-            Login failed.
+          
 			<? echo "<br> $error <br> "?>
         </div>
         <br>

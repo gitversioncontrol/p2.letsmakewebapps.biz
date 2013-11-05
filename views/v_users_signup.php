@@ -15,7 +15,16 @@
     Password<br>
     <input type='password' name='password'  required>
     <br><br>
-
+	
+	<?php if(isset($error)): ?>
+	        <div class='error'>
+            Sign-up failed.
+			<? echo "<br> $error <br> "?>
+        </div>
+        <br>
+    <?php endif; ?>
+	
     <input type='submit' value='Sign up'  required>
 
 </form>
+

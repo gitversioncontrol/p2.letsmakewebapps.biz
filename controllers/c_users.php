@@ -2,25 +2,33 @@
 class users_controller extends base_controller {
 
 	public $error_provided;
+		
     public function __construct() {
         parent::__construct();
 	    //echo "users_controller construct called<br><br>";
     } 
 
     public function index() {
-        echo "This is the index page";
+       // echo "This is the index page";
     }
 
-    public function signup() {
+    public function signup($error=null) {
        // echo "This is the signup page";
 		//RemindeR:Add Styles here for signup page
 		$this->template->content=View::instance('v_users_signup');
 		$this->template->title="Sign up";
+		#Error Condition
+		$this->template->content->error=$error;
+		
+		//Render Template
 		echo $this->template;
     }
 	
 	public function p_signup(){
 		print_r($_POST);
+		# Sanitize the user entered data to prevent any funny-business (re: SQL Injection Attacks)
+		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+		
 		//Time stamp for created and Modified columns
 		$_POST['created']  = Time::now();
 		$_POST['modified'] = Time::now();
@@ -31,16 +39,33 @@ class users_controller extends base_controller {
 		//Token generation and encryption using email address
 		$_POST['token'] = crypt($_POST['email'],TOKEN_SALT).Utils::generate_random_string();
 		
+		//Search for exisiting userid/email
+		$q="select email from users where email='".$_POST['email']."'";
+		echo $q;
+		$userid=DB::instance(DB_NAME)->select_field($q);
+		
+		if(! $userid){
 		
 		//print_r($_POST);
 		DB::instance(DB_NAME)->insert('users',$_POST);
 		
 		# For now, just confirm they've signed up - 
 		# You should eventually make a proper View for this
-		//echo 'You\'re signed up';
+		//echo 'You\'re signed up';Please login.
+		$msg="Signup is successful.Please proceed with log-in.";
+		Router::redirect("/users/login/$msg");
+		}
+		else{
+		 //Send them back to the Sign-up page
+				//$this->error_generate(); //To pass corresponding error message
+		$error_received="User-id ".$_POST['email']." is already registered.Please log-in";
+		//echo $error_received;
+		Router::redirect("/users/signup/$error_received");
+		}
 		
 	}
-
+	
+	
     public function login($error_passed=null) {
 		# Settle Login View
 		$this->template->content=View::instance('v_users_login');
@@ -74,7 +99,6 @@ class users_controller extends base_controller {
 		//	echo "$token <br>";
 	
 			if($token){
-			
 			setcookie("token", $token, strtotime('+1 year'), '/'); //Store this token in a cookie using setcookie()
 			echo "Logged in Successfully <br>";
 			//echo "Token cookie settled as :".$_COOKIE['token'];
@@ -132,41 +156,32 @@ class users_controller extends base_controller {
 
     public function profile() {
 	
-		/*echo $user_name ;
-       $viewobj = View::instance('v_users_profile'); //View class from library in capital
-		$viewobj->user_name=$username;
-		echo $viewobj;
-		
-		var_dump($viewobj);
-		print_r($viewobj);
-		
-		/*var_dump($this->template);
-		*/
-		
-		/*
-		$this->template->content =View::instance('v_users_profile');
-		//var_dump($this->template->contentuser);
-		//var_dump($this->template);
-		$this->template->content->username=$user_name;
-		$this->template->client_files_head='<link rel="stylesheet" href="/css/p1Styles.css" type="text/css">';
-		//var_dump($this->template->contentuser->username);
-		echo $this->template;
-		//var_dump($this->template); //To check object information and contents
-		//print_r($this->template);
-		//$contentvar=View::instance('v_users_profile');
-		*/
 		
 		if ($this->user){
 		//print_r($this->user);
 		$this->template->content=View::instance('v_users_profile');
 		$this->template->title="Profile of ".$this->user->first_name;
+		
+		//Posts for this user
+		$this->template->content->posts=$this->post->get_post_for_user($this->user->user_id);
+		//print_r($this->post->get_post_for_user($this->user->user_id));
 		echo $this->template;
+		
+		//See your own posts and edit/delete them.
+		//$this->$postsobj->get;
+		
 		//echo " This is the profile for ". $this->user->first_name;
 		}
 		else{
-		Router::redirect('/users/login');
+		$error="Please  first log-in to check profile page.";
+		Router::redirect("/users/login/$error");
 		}
 	
     }
+	
+	public function edit_profile(){
+	
+	
+	}
 
 } # end of the class

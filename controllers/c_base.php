@@ -25,7 +25,12 @@ class base_controller {
 		# So we can use $user in views			
 			$this->template->set_global('user', $this->user);
 			
-		
+		#Instantiate Post obj
+			$this->post=new Post();
+			
+		#Get post data for user
+		//$this->post=$this->postObj->
+		//print_r($this->post);
 	}
 
 	
