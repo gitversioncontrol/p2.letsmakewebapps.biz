@@ -100,7 +100,7 @@ class users_controller extends base_controller {
 	
 			if($token){
 			setcookie("token", $token, strtotime('+1 year'), '/'); //Store this token in a cookie using setcookie()
-			echo "Logged in Successfully <br>";
+			//echo "Logged in Successfully <br>";
 			//echo "Token cookie settled as :".$_COOKIE['token'];
 			# Send them to the main page - or whever you want them to go
 			Router::redirect("/");
