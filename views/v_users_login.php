@@ -12,6 +12,8 @@
 	        <div class='error'>
           
 			<? echo "<br> $error <br> "?>
+			Please retry login with correct credentials,or sign-up:
+			 <a href='/users/signup'>Sign up</a>
         </div>
         <br>
     <?php endif; ?>

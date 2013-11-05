@@ -28,9 +28,8 @@ class base_controller {
 		#Instantiate Post obj
 			$this->post=new Post();
 			
-		#Get post data for user
-		//$this->post=$this->postObj->
-		//print_r($this->post);
+		# Load Styles
+		$this->template->client_files_head='<link rel="stylesheet" href="/css/p2Styles.css" type="text/css">';
 	}
 
 	

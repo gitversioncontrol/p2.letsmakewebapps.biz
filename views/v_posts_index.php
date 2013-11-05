@@ -2,14 +2,14 @@
 
 <article>
 
-    <h1><?=$post['first_name']?> <?=$post['last_name']?> posted:</h1>
+    
 
-    <p><?=$post['content']?></p>
-
-    <time datetime="<?=Time::display($post['created'],'Y-m-d G:i')?>">
-        <?=Time::display($post['created'])?>
-    </time>
-
+<p>
+  At:  <time datetime="<?=Time::display($post['modified'],'Y-m-d G:i')?>"> <?=Time::display($post['modified'])?></time> ,
+	 
+		<?=$post['first_name']?> <?=$post['last_name']?> posted :
+	<?=$post['content']?>
+	</p>
 </article>
 
 <?php endforeach; ?>

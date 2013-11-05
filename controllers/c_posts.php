@@ -100,7 +100,7 @@ class posts_controller extends base_controller{
         INNER JOIN users 
             ON posts.user_id = users.user_id";*/
 			
-	$q='select uu.user_id_followed ,p.content,u.first_name ,u.last_name,p.created
+	$q='select uu.user_id_followed ,p.content,u.first_name ,u.last_name,p.created,p.modified
 		from users u,posts p,users_users uu
 		where uu.user_id_followed=u.user_id
 		and p.user_id=u.user_id

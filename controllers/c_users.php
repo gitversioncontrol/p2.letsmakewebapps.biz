@@ -6,10 +6,12 @@ class users_controller extends base_controller {
     public function __construct() {
         parent::__construct();
 	    //echo "users_controller construct called<br><br>";
+		
     } 
 
     public function index() {
        // echo "This is the index page";
+	   Router::redirect("/");
     }
 
     public function signup($error=null) {

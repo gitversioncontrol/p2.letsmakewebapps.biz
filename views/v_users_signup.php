@@ -20,6 +20,7 @@
 	        <div class='error'>
             Sign-up failed.
 			<? echo "<br> $error <br> "?>
+			<a href='/users/login'>Log in</a>
         </div>
         <br>
     <?php endif; ?>
