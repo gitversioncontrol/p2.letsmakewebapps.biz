@@ -25,7 +25,7 @@ class users_controller extends base_controller {
     }
 	
 	public function p_signup(){
-		print_r($_POST);
+		//print_r($_POST);
 		# Sanitize the user entered data to prevent any funny-business (re: SQL Injection Attacks)
 		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
 		
@@ -41,7 +41,7 @@ class users_controller extends base_controller {
 		
 		//Search for exisiting userid/email
 		$q="select email from users where email='".$_POST['email']."'";
-		echo $q;
+		//echo $q;
 		$userid=DB::instance(DB_NAME)->select_field($q);
 		
 		if(! $userid){
@@ -131,7 +131,7 @@ class users_controller extends base_controller {
 	}
 
     public function logout() {
-        echo "This is the logout page";
+        
 		$existing_token=$this->user->token;
 		
 		# Generate and save a new token for next login
@@ -151,7 +151,7 @@ class users_controller extends base_controller {
 		# Send them back to the main index.
 		Router::redirect("/");
 		#Insert new to database
-		echo $new_token;
+		//echo $new_token;
     }
 
     public function profile() {
