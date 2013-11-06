@@ -1,8 +1,8 @@
 
 
-<h1>This is you current post:<h1>
+<h1>Edit post:<h1>
 
-<p>Existing contents of this post are: <?=$post_content?> </p>
+<p>Existing post is: <?=$post_content?> </p>
 
 <form method='POST' action='/posts/p_edit/<?=$post_id?>'>
 

@@ -19,6 +19,6 @@
     <?php endif; ?>
 	
 
-    <input type='submit' value='Log in'  required>
+    <input type='submit' value='Log in'  >
 
 </form>

@@ -25,7 +25,7 @@
         <br>
     <?php endif; ?>
 	
-    <input type='submit' value='Sign up'  required>
+    <input type='submit' value='Sign up' >
 
 </form>
 

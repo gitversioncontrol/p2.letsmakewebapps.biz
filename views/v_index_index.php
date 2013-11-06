@@ -38,6 +38,10 @@
 		
 		</div>	
 		
+		<div id="bottomLeft">
+		Html Validation:
+		</div>
+		
 		<?php endif; ?>
 		
 		
