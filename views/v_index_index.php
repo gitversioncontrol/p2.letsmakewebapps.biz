@@ -39,7 +39,7 @@
 		</div>	
 		
 		<div id="bottomLeft">
-		Html Validation:
+		<a href='http://validator.w3.org/check?uri=http%3A%2F%2Fp2.letsmakewebapps.biz%2F'>Html Validation</a>
 		</div>
 		
 		<?php endif; ?>

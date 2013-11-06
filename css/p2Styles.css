@@ -50,9 +50,9 @@ margin-left: 20%;
 }
 
 #bottomLeft{
-position:relative
+position:fixed;
 left:10px;
-margin-top:18cm;
+margin-top:16cm;
 }
 
 .error{
