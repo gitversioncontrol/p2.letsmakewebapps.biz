@@ -29,7 +29,7 @@ class base_controller {
 			$this->post=new Post();
 			
 		# Load Styles
-		$this->template->client_files_head='<link rel="stylesheet" href="/css/p2Styles.css" type="text/css">';
+			$this->template->client_files_head='<link rel="stylesheet" href="/css/p2Styles.css" type="text/css">';
 	}
 
 	
